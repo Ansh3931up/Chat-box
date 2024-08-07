@@ -253,16 +253,16 @@ const getCurrentUser=asyncHandler(async(req,res)=>{
 })
 
 const updateAccountDetails=asyncHandler(async(req,res)=>{
-    const {fullname,email,Pincode,State,address}=req.body
+    const {fullname,email}=req.body
     console.log(req.body)
-    if(!fullname||!email|!Pincode||!State||!address){
+    if(!fullname||!email){
         throw new ApiError(404,"all fields are required")
     }
     const newuser= await User.findByIdAndUpdate(
         req.user?._id,
         {
             $set:
-            {fullname,email,Pincode,State,address}
+            {fullname,email}
         },
         {
             new:

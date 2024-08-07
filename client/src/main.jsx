@@ -52,11 +52,11 @@ const router = createBrowserRouter(
       {/* <Route path='checkout/success' element={<CheckoutSuccess />} /> */}
       {/* <Route path='checkout/fail' element={<CheckoutFailure />} /> */}
       <Route path='main' element={<MainPage />} />
-      <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
-          <Route path="user/profile" element={<Profile />} />
-        </Route>
+      {/* <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}> */}
+          <Route path="main/user/profile" element={<Profile />} />
+        {/* </Route> */}
         <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
-          <Route path="user/profile/editprofile" element={<EditProfile />} />
+          <Route path="main/user/profile/editprofile" element={<EditProfile />} />
         </Route>
       {/* <Route path="newsletter" element={<Newsletter/>}/> */}
       {/* <Route path="gallery" element={<PhotoGallery />} /> */}

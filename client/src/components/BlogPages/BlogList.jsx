@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getblog } from "../../Redux/Blog";
+// import { getblog } from "../../Redux/Blog";
 import BlogCard from "../BlogCard";
 import updateImage from "./update.jpg"; // Import the background image
 
@@ -12,7 +12,7 @@ function BlogList() {
     const role = useSelector((state) => state.auth.role); 
 
     useEffect(() => {
-        dispatch(getblog());
+        // dispatch(getblog());
     }, [dispatch]);
 
     return (

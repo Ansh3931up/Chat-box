@@ -5,6 +5,7 @@ import { Chat } from "../module/chat.model.js";
 import { User } from "../module/user.model.js";
 import mongoose from "mongoose";
 import { emitSocketEvent } from "../socket/index.js";
+import { ChatEventEnum } from "../src/constant.js";
 
 const chatCommonAggregation = () => [
   {
@@ -306,6 +307,14 @@ const deleteGroupChat = asyncHandler(async (req, res) => {
 
 const createOrGetAOneOnOneChat = asyncHandler(async (req, res) => {
   const { receiverId } = req.params;
+  
+  console.log("receiverId", receiverId);
+  console.log("users", req.user); // Assuming req.user contains the authenticated user's info
+
+  if (!mongoose.Types.ObjectId.isValid(receiverId)) {
+    return res.status(400).send({ error: 'Invalid receiver ID format' });
+  }
+
   const user = await User.findById(receiverId);
 
   if (!user) {
@@ -322,7 +331,7 @@ const createOrGetAOneOnOneChat = asyncHandler(async (req, res) => {
         isGroupChat: false,
         participants: {
           $all: [
-            req.user._id,
+            new mongoose.Types.ObjectId(req.user._id),
             new mongoose.Types.ObjectId(receiverId),
           ],
         },
@@ -339,7 +348,7 @@ const createOrGetAOneOnOneChat = asyncHandler(async (req, res) => {
 
   const newChatInstance = await Chat.create({
     name: "One on one chat",
-    participants: [req.user._id, new mongoose.Types.ObjectId(receiverId)],
+    participants: [new mongoose.Types.ObjectId(req.user._id),new mongoose.Types.ObjectId(receiverId)],
     admin: req.user._id,
   });
 
@@ -373,6 +382,7 @@ const createOrGetAOneOnOneChat = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, payload, "Chat created successfully"));
 });
+
 
 const createAGroupChat = asyncHandler(async (req, res) => {
   const { name, participants } = req.body;

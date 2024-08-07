@@ -4,13 +4,13 @@ import toast from "react-hot-toast";
 import axiosInstance from "../Helpers/axios";
 
 const initialState = {
-  BlogData: [], // Initialize blogs as an empty array
+  SinglesChatData: [], // Initialize blogs as an empty array
 };
 
 // Async thunk to fetch blog data
-export const getblog = createAsyncThunk('blog/getall', async (data) => {
+export const createsinglechat = createAsyncThunk("chat-app/createsinglechat", async (data) => {
   try {
-    const response = await axiosInstance.get('/blog', data);
+    const response = await axiosInstance.post(`/chat-app/chat/c/${data}`);
     return response.data; // Return the actual data fetched
   } catch (error) {
     console.error(error);
@@ -52,16 +52,16 @@ export const removeBlog = createAsyncThunk('blog/remove', async (data) => {
 });
 // Redux slice for blog state management
 export const blogSlice = createSlice({
-  name: 'blog',
+  name: 'chats',
   initialState,
   reducers: {
     // You can add reducers here if needed
   },
   extraReducers: (builder) => {
-    builder.addCase(getblog.fulfilled, (state, action) => {
+    builder.addCase(createsinglechat.fulfilled, (state, action) => {
       // Update state with fetched blog data when the promise is fulfilled
-      // console.log("action",action.payload.data);
-      state.BlogData = action.payload.data; // Assuming action.payload is an array of blog items
+      console.log("action",action.payload.data);
+      state.SinglesChatData = action.payload.data; // Assuming action.payload is an array of blog items
     }),
     builder.addCase(createblog.fulfilled, (state, action) => {
         state.BlogData.push(action.payload); // Assuming action.payload is the new blog item

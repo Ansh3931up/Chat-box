@@ -6,6 +6,7 @@ import { Chat } from "../module/chat.model.js";
 import { Message } from "../module/message.model.js";
 import mongoose from "mongoose";
 import { emitSocketEvent } from "../socket/index.js";
+import { ChatEventEnum } from "../src/constant.js";
 
 // Common aggregation pipeline for chat messages
 const chatMessageCommonAggregation = () => {
@@ -87,8 +88,8 @@ const deleteMessage = asyncHandler(async (req, res) => {
     throw new ApiError(403, "You are not authorized to delete this message");
   }
   
-  if (message.attachments.length > 0) {
-    message.attachments.forEach((attachment) => {
+  if (message?.attachments?.length > 0) {
+    message?.attachments?.forEach((attachment) => {
       removeLocalFile(attachment); // Ensure removeLocalFile function is defined elsewhere
     });
   }
@@ -97,7 +98,7 @@ const deleteMessage = asyncHandler(async (req, res) => {
     _id: new mongoose.Types.ObjectId(messageId),
   });
   
-  if (chat.lastMessage.toString() === message._id.toString()) {
+  if (chat?.lastMessage?.toString() === message?._id?.toString()) {
     const lastMessage = await Message.findOne(
       { chat: chatId },
       {},

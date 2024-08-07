@@ -85,9 +85,9 @@ export const getUserData=createAsyncThunk('auth/getUserData',async(data)=>{
         return error.response.data;
     }
 })
-export const logout=createAsyncThunk('auth/logout',async(data)=>{
+export const logout=createAsyncThunk('auth/logout',async()=>{
  try {
-       const res=axiosInstance.post('user/logout',data);
+       const res=axiosInstance.post('user/logout');
        toast.promise(
            res,
            {
