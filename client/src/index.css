@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  /* margin:auto; */
+  max-width: 100vw;
+  position: relative;
+}
+:root {
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+/* index.css or App.css */
+:root {
+  --primary-bg-gradient: linear-gradient(to br, #1f1f2e, #4b0082); /* Background gradient */
+  --primary-color: #9b4dca; /* Primary color */
+  --text-color: #ffffff; /* Text color */
+}
+
+body {
+  background: var(--primary-bg-gradient);
+  color: var(--text-color);
+  font-family: 'Arial', sans-serif;
+}
+
+.header,
+.footer {
+  background: var(--primary-bg-gradient);
+  color: var(--text-color);
+}
+
+.button-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-primary:hover {
+  background-color: #7a3d9e;
+}
+
+.bg-muted {
+  background-color: #1e1e2e;
+}
+
+.text-muted {
+  color: #b0b0b0;
+}
+.video-container {
+  position: absolute;
+  z-index: 10;
+}
+
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-gradient {
+  background: var(--primary-bg-gradient);
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
