@@ -61,7 +61,7 @@ export default function LandingPage() {
             height="50"
             className="rounded-full"
           />
-          <span className="text-2xl font-bold text-purple-300">ChatApp</span>
+          <span className="text-2xl font-bold text-purple-300">TransLingo</span>
         </div>
         <nav className="hidden md:flex space-x-6">
           <Link href="/" className="text-gray-300 hover:text-purple-300 transition-colors">Home</Link>
